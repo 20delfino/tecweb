@@ -48,6 +48,23 @@
     echo "<p> Las variables \$b y \$c están relacionadas con \$a por referencia,
                 de este modo y como se puede observar cualquier cambio en \$a afectará 
                 directamente a \$b y \$c</p>";
+
+    //Ejercicio 3
+    echo "<h2> 3. Muestra el contenido de cada variable inmediatamente después de cada asignación,
+        y verificar la evolución del tipo de estas variables:</h2>";
+    
+    $a = "PHP5";
+    $z[] = &$a;
+    $b = "5a version de PHP";
+    $c = $b*10; // Multiplicación causa un cambio de tipo
+    $a .= $b; // Concatenación
+    $b *= $c;
+    $z[0] = “MySQL”;
+        
+    echo "$a <br>"; // PHP55a version de PHP
+    echo "$b <br>"; // 5a version de PHP
+    echo "$c <br>"; // 0 (si $b no puede ser convertido a número)
+    echo "$z <br>";
 ?>
 </body>
 </html>
