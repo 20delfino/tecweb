@@ -20,6 +20,9 @@
     } else {
         echo "<h1>Por favor, complete el formulario.</h1>";
     }
-    ?>
+
+?>
+
+
 </body>
 </html>
