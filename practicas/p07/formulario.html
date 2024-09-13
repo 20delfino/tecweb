@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios 5 y 6</title>
+</head>
+<body>
+    <h1>Formulario para Verificar Edad y Sexo</h1>
+    <form action="src/respuesta.php" method="POST">
+        <label for="edad">Edad:</label>
+        <input type="number" name="edad">
+        <br><br>
+        <label for="sexo">Sexo:</label>
+        <select name="sexo">
+            <option value="femenino">Femenino</option>
+            <option value="masculino">Masculino</option>
+            <option value="otro">Otro</option>
+        </select>
+        <br><br>
+        <input type="submit" value="Enviar">
+    </form>
+</body>
+</html>

@@ -6,17 +6,25 @@ include "src/funciones.php"
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Funciones</title>
+    <title>Practica 7</title>
 </head>
 <body>
-    <h1>Para visualizar la solucion de cada ejercicio rellena el formulario:</h1>
+    <h1>Para visualizar la solucion de cada ejercicio rellena el campo correspondiente del formulario:</h1>
     <form method="GET">
         <h2>Ejercicio 1 comprobar si un numero es multiplo de 5 y 7.</h2>
         <h3>Ingresa el número a comprobar: <input type="number" name="numero"></h3>
         <p><input type="submit" value="Comprobar"></p>
         <?php
-            $numero = $_GET['numero'];
-            multiplo5y7($numero);
+            if (isset($_GET['numero'])) {
+                $numero = intval($_GET['numero']);
+                if ($numero > 0) {
+                    multiplo5y7($numero);
+                } else {
+                    echo "Por favor ingresa un número mayor a cero para comprobar";
+                }
+            } else {
+                echo "Por favor ingresa un número para comprobar";
+            }
         ?>
         <h2>Ejercicio 2: Generar Secuencia Impar, Par, Impar</h2>
         <?php
@@ -26,11 +34,9 @@ include "src/funciones.php"
         ?>
 
         <h2>Ejercicio 3: Encontrar Múltiplo con Ciclo While</h2>
-        <form method="GET">
-            <label for="multiplo">Introduce un número para encontrar su múltiplo:</label>
-            <input type="number" name="multiplo">
-            <button type="submit">Encontrar Múltiplo</button>
-        </form>
+        <label for="multiplo">Introduce un número para encontrar su múltiplo:</label>
+        <input type="number" name="multiplo">
+        <button type="submit">Encontrar Múltiplo</button>
 
         <?php
         if (isset($_GET['multiplo'])) {
