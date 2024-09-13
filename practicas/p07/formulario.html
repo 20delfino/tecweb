@@ -21,6 +21,20 @@
         <br><br>
         <input type="submit" value="Enviar">
     </form>
+    <h2>Consulta de Vehículos</h2>
 
+    <form action="src/respuesta.php" method="POST">
+        <h2>Consultar por Matrícula</h2>
+        <label for="matricula">Matrícula:</label>
+        <input type="text" id="matricula" name="matricula" required>
+        <input type="submit" name="buscar" value="Buscar">
+    </form>
+
+    <hr>
+
+    <form action="src/respuesta.php" method="POST">
+        <h2>Mostrar Todos los Autos Registrados</h2>
+        <input type="submit" name="mostrar_todos" value="Mostrar Todos">
+    </form>
 </body>
 </html>
