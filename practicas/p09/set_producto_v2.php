@@ -2,13 +2,16 @@
 // Conexión a la base de datos
 @$link = new mysqli('localhost', 'root', '12345678a', 'marketzone');	
 
-if ($conexion->connect_error) {
-    die("Error de conexión: " . $conexion->connect_error);
+/** comprobar la conexión */
+if ($link->connect_errno) 
+{
+    die('Falló la conexión: '.$link->connect_error.'<br/>');
+    /** NOTA: con @ se suprime el Warning para gestionar el error por medio de código */
 }
 
 // Recibe los datos del formulario
 $nombre = $_POST['nombre'];
-$marca = $_POST['marca'];x
+$marca = $_POST['marca'];
 $modelo = $_POST['modelo'];
 $precio = $_POST['precio'];
 $detalles = $_POST['detalles'];
