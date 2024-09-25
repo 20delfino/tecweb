@@ -73,8 +73,13 @@ if ($resultado->num_rows > 0) {
     echo "El producto ya existe en la base de datos.";
 } else {
     // Insertar el nuevo producto en la base de datos, incluyendo la ruta de la imagen
-    $insert = "INSERT INTO productos (nombre, marca, modelo, precio, detalles, unidades, imagen, eliminado) 
-               VALUES ('$nombre', '$marca', '$modelo', '$precio', '$detalles', '$unidades', '$ruta_final_imagen', 0)";
+    //$insert = "INSERT INTO productos (nombre, marca, modelo, precio, detalles, unidades, imagen, eliminado) 
+    //           VALUES ('$nombre', '$marca', '$modelo', '$precio', '$detalles', '$unidades', '$ruta_final_imagen', 0)";
+
+    //Nuevo query (solo se omite agregar la columna de eliminado):
+
+    $insert = "INSERT INTO productos (nombre, marca, modelo, precio, detalles, unidades, imagen) 
+           VALUES ('$nombre', '$marca', '$modelo', '$precio', '$detalles', '$unidades', '$ruta_final_imagen')";
 
     if ($link->query($insert) === TRUE) {
         echo "Producto registrado con éxito.<br>";
