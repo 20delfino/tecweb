@@ -1,70 +1,141 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
-"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title> Práctica 5 </title>
-    </head>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicios</title>
+</head>
 <body>
-<?php
-        //Ejercicio 1
-    echo "<h2> 1. Determina cuál de las siguientes variables son válidas y explica por qué:</h2>";
-    echo "<h3> a) \$_myvar b) \$_7var c) myvar d) \$myvar e) \$var7 f) \$_element1 g) \$house*5 </h3>";
-    echo "<h3> Respuesta:</h3>
-        <p>Las opciones a, b, d, e y f son las variable válidas, a continuacion se explica por qué las
-            opciones c y g no lo son:
-        </p>
-        <ul>
-        <li> c) Toda variable en php debe comenzar con el simbolo de $ lo cual no tiene. </li>
-        <li> g) A pesar de que la variable empieza por el simbolo $, ésta opcion no es correcta ya que incluye 
-            el carácter de *. </li>
-        </ul> ";
+    <h1>Respuesta a los ejercicios de la práctica</h1>
 
-        //Ejercicio 2
-    echo "<h2>2. Proporcionar los valores de \$a, \$b, \$c como sigue y mostrar el contenido de cada variable:</h2>";
-    $a = "ManejadorSQL";
-    $b = 'MySQL';
-    $c = &$a;
+    <h2>Ejercicio 1</h2>
+    <p>
+        <?php
+            echo 'Variables válidas: $_myvar, $_7var, $myvar, $var7, $_element1<br />';
+            echo 'Variables inválidas: myvar, $house*5<br />';
+            echo 'Las variables necesitan empezar con $ seguidas por un guion bajo (_) o letra, sin caracteres especiales como *.<br />';
+        ?>
+    </p>
 
-    echo "<p>\$a</> <br>";
-    echo $a; // ManejadorSQL
-    echo "<p>\$b</> <br>";
-    echo $b; // MySQL
-    echo "<p>\$c</> <br>";
-    echo $c; // ManejadorSQL
-    echo "<br>";
-    echo "<h3> -Proporcionar los valores de \$a, \$b, \$c como sigue:</h3>";
-    echo "<p>\$a = 'PHP server'</p>";
-    echo "<p>\$b = &\$a</p>";
+    <h2>Ejercicio 2</h2>
+    <p>
+        <?php
+            $a = "ManejadorSQL";  
+            $b = 'MySQL';  
+            $c = &$a;  // Asignación por referencia
 
-    echo "<h3> -Mostrar los nuevos valores: </h3>";
-    echo "<p>\$a</> <br>";
-    echo $a; // PHP server
-    echo "<p>\$b</> <br>";
-    echo $b; // PHP server
-    echo "<p>\$c</> <br>";
-    echo $c; // PHP server
-    echo "<h3> -Describiendo lo observado</h3>";
-    echo "<p> Las variables \$b y \$c están relacionadas con \$a por referencia,
-                de este modo y como se puede observar cualquier cambio en \$a afectará 
-                directamente a \$b y \$c</p>";
+            // Imprimir los valores de las variables con concatenación
+            echo '$a: ' . htmlspecialchars($a) . ' $b: ' . htmlspecialchars($b) . ' $c: ' . htmlspecialchars($c) . '<br />';
 
-    //Ejercicio 3
-    echo "<h2> 3. Muestra el contenido de cada variable inmediatamente después de cada asignación,
-        y verificar la evolución del tipo de estas variables:</h2>";
-    
-    $a = "PHP5";
-    $z[] = &$a;
-    $b = "5a version de PHP";
-    $c = $b*10; // Multiplicación causa un cambio de tipo
-    $a .= $b; // Concatenación
-    $b *= $c;
-    $z[0] = “MySQL”;
-        
-    echo "$a <br>"; // PHP55a version de PHP
-    echo "$b <br>"; // 5a version de PHP
-    echo "$c <br>"; // 0 (si $b no puede ser convertido a número)
-    echo "$z <br>";
-?>
+            $a = "PHP server";  
+            $b = &$a; 
+
+            // Imprimir los valores de las variables actualizados
+            echo '$a: ' . htmlspecialchars($a) . ' $b: ' . htmlspecialchars($b) . ' $c: ' . htmlspecialchars($c) . '<br />';
+            echo 'Al hacer que las variables $b y $c referencien a $a, el contenido de $a se copió en las demás variables.<br />';
+
+            unset($a, $b, $c);
+        ?>
+    </p>
+
+    <h2>Ejercicio 3</h2>
+    <p>
+        <?php
+            $a = "PHP5";
+            $z[] = &$a;
+            $b = "5a version de PHP";
+            
+            // Convertir $b a un valor numérico antes de multiplicar
+            $c = intval($b) * 10;
+            $a .= $b;
+            $b = intval($b);
+            $b *= $c;
+            $z[0] = "MySQL";
+
+            echo "Valores de las variables:<br />";
+            echo "\$a = ";
+            var_dump($a);
+            echo "<br />\$b = ";
+            var_dump($b);
+            echo "<br />\$c = ";
+            var_dump($c);
+            echo "<br />\$z = ";
+            print_r($z);
+
+            unset($a, $b, $c, $z);
+        ?>
+    </p>
+
+    <h2>Ejercicio 4</h2>
+    <p>
+        <?php
+            $a = "PHP5";
+            $z[] = &$a;
+            $b = "5a version de PHP";
+            
+            // Convertir $b a un valor numérico antes de multiplicar
+            $c = intval($b) * 10;
+
+            echo "Valores usando \$GLOBALS:<br />";
+            echo "\$a = " . htmlspecialchars($GLOBALS['a']) . "<br />";
+            echo "\$b = " . htmlspecialchars($GLOBALS['b']) . "<br />";
+            echo "\$c = " . htmlspecialchars($GLOBALS['c']) . "<br />";
+
+            unset($a, $b, $c, $z);
+        ?>
+    </p>
+
+    <h2>Ejercicio 5</h2>
+    <p>
+        <?php
+            $a = "7 personas";
+            $b = (integer) $a;
+            $a = "9E3";
+            $c = (double) $a;
+
+            echo "Valores después de las conversiones:<br />";
+            echo "\$a = " . htmlspecialchars($a) . "<br />";
+            echo "\$b = " . htmlspecialchars($b) . "<br />";
+            echo "\$c = " . htmlspecialchars($c) . "<br />";
+
+            unset($a, $b, $c);
+        ?>
+    </p>
+
+    <h2>Ejercicio 6</h2>
+    <p>
+        <?php
+            $a = "0";
+            $b = "TRUE";
+            $c = FALSE;
+            $d = ($a || $b);
+            $e = ($a && $c);
+            $f = ($a xor $b);
+
+            echo "Valores booleanos usando var_dump:<br />";
+            var_dump($a, $b, $c, $d, $e, $f);
+
+            // Convertir booleanos a valores que se puedan mostrar con echo
+            echo "<br />Valores de \$c y \$e mostrables:<br />";
+            echo "c = " . (int)$c . "<br />";
+            echo "e = " . (int)$e . "<br />";
+
+            unset($a, $b, $c, $d, $e, $f);  
+        ?>
+    </p>
+
+    <h2>Ejercicio 7</h2>
+    <p>
+        <?php
+            echo "Versión de Apache y PHP: " . htmlspecialchars($_SERVER['SERVER_SOFTWARE']) . "<br />";
+            echo "Sistema operativo del servidor: " . htmlspecialchars(PHP_OS) . "<br />";
+            echo "Idioma del navegador: " . htmlspecialchars($_SERVER['HTTP_ACCEPT_LANGUAGE']) . "<br />";
+        ?>
+    </p>
+    <p>
+        <a href="https://validator.w3.org/markup/check?uri=referer"><img
+        src="https://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0 Strict" height="31" width="88" /></a>
+    </p>
 </body>
 </html>
