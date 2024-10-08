@@ -35,6 +35,7 @@
             echo '<th scope="col">Unidades</th>';
             echo '<th scope="col">Detalles</th>';
             echo '<th scope="col">Imagen</th>';
+            echo '<th scope="col">Acciones</th>';  // Nueva columna para las acciones de edición
             echo '</tr>';
             echo '</thead>';
             echo '<tbody>';
@@ -50,6 +51,7 @@
                 echo '<td>' . htmlspecialchars($row['unidades']) . '</td>';
                 echo '<td>' . utf8_encode($row['detalles']) . '</td>';
                 echo '<td><img src="' . htmlspecialchars($row['imagen']) . '" alt="Imagen del producto" width="100" /></td>';
+                echo '<td><a href="formulario_productos_v2.php?id=' . $row['id'] . '" class="btn btn-primary">Editar</a></td>'; 
                 echo '</tr>';
             }
 

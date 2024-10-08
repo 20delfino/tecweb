@@ -72,6 +72,7 @@
 					<th scope="col">Unidades</th>
 					<th scope="col">Detalles</th>
 					<th scope="col">Imagen</th>
+					<th scope="col">Acciones</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -85,6 +86,7 @@
 						<td><?= $value['unidades'] ?></td>
 						<td><?= $value['detalles'] ?></td>
 						<td><img src=<?= $value['imagen'] ?> ></td>
+						<td><a href="formulario_productos_v2.php?id=' . $row['id'] . '" class="btn btn-primary">Editar</a></td>
 					</tr>
 					<?php endforeach; ?>
 				</tbody>
