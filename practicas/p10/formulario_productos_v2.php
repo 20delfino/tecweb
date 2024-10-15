@@ -62,7 +62,8 @@
 
 <body>
   <h1>Registro de productos para la tienda de instrumentos</h1>
-  <form id="formularioProductos" action="http://localhost/tecweb/practicas/p10/set_producto_v2.php" method="post" enctype="multipart/form-data" onsubmit="return validarFormulario()">
+  <form id="formularioProductos" action="http://localhost/tecweb/practicas/p10/update_producto.php" method="post" enctype="multipart/form-data" onsubmit="return validarFormulario()">
+    <input type="hidden" name="id" value="<?= !empty($_POST['id']) ? $_POST['id'] : (!empty($_GET['id']) ? $_GET['id'] : (isset($producto['id']) ? $producto['id'] : '')) ?>" />
     <h2>Información del producto</h2>
       <fieldset>
         <legend>Rellena todos los datos</legend>

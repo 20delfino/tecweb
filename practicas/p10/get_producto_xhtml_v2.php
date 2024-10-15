@@ -5,33 +5,33 @@
     //header("Content-Type: application/json; charset=utf-8"); 
     $data = array();
 
-	if(isset($_GET['tope']))
+    if(isset($_GET['tope']))
     {
-		$tope = $_GET['tope'];
+        $tope = $_GET['tope'];
     }
     else
     {
         die('Parámetro "tope" no detectado...');
     }
 
-	if (!empty($tope))
-	{
-		/** SE CREA EL OBJETO DE CONEXION */
-		@$link = new mysqli('localhost', 'root', '12345678a', 'marketzone');
+    if (!empty($tope))
+    {
+        /** SE CREA EL OBJETO DE CONEXION */
+        @$link = new mysqli('localhost', 'root', '12345678a', 'marketzone');
         /** NOTA: con @ se suprime el Warning para gestionar el error por medio de código */
 
-		/** comprobar la conexión */
-		if ($link->connect_errno) 
-		{
-			die('Falló la conexión: '.$link->connect_error.'<br/>');
-			//exit();
-		}
+        /** comprobar la conexión */
+        if ($link->connect_errno) 
+        {
+            die('Falló la conexión: '.$link->connect_error.'<br/>');
+            //exit();
+        }
 
-		/** Crear una tabla que no devuelve un conjunto de resultados */
-		if ( $result = $link->query("SELECT * FROM productos WHERE unidades <= $tope") ) 
-		{
+        /** Crear una tabla que no devuelve un conjunto de resultados */
+        if ( $result = $link->query("SELECT * FROM productos WHERE unidades <= $tope") ) 
+        {
             /** Se extraen las tuplas obtenidas de la consulta */
-			$row = $result->fetch_all(MYSQLI_ASSOC);
+            $row = $result->fetch_all(MYSQLI_ASSOC);
 
             /** Se crea un arreglo con la estructura deseada */
             foreach($row as $num => $registro) {            // Se recorren tuplas
@@ -40,63 +40,83 @@
                 }
             }
 
-			/** útil para liberar memoria asociada a un resultado con demasiada información */
-			$result->free();
-		}
+            /** útil para liberar memoria asociada a un resultado con demasiada información */
+            $result->free();
+        }
 
-		$link->close();
+        $link->close();
 
         /** Se devuelven los datos en formato JSON */
         //echo json_encode($data, JSON_PRETTY_PRINT);
-	}
-	?>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<title>Producto</title>
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	</head>
-	<body>
-		<h3>PRODUCTO</h3>
+    }
+    ?>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Producto</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script>
+            function sendToForm(id, nombre, marca, modelo, precio, unidades, detalles, imagen) {
+                var urlForm = "http://localhost/tecweb/practicas/p10/formulario_productos_v2.php";
+                var params = `id=${id}&nombre=${encodeURIComponent(nombre)}&marca=${encodeURIComponent(marca)}&modelo=${encodeURIComponent(modelo)}&precio=${encodeURIComponent(precio)}&unidades=${encodeURIComponent(unidades)}&detalles=${encodeURIComponent(detalles)}&imagen=${encodeURIComponent(imagen)}`;
 
-		<br/>
-		
-		<?php if( isset($row) ) : ?>
-			<table class="table">
-				<thead class="thead-dark">
-					<tr>
-					<th scope="col">#</th>
-					<th scope="col">Nombre</th>
-					<th scope="col">Marca</th>
-					<th scope="col">Modelo</th>
-					<th scope="col">Precio</th>
-					<th scope="col">Unidades</th>
-					<th scope="col">Detalles</th>
-					<th scope="col">Imagen</th>
-					<th scope="col">Acciones</th>
-					</tr>
-				</thead>
-				<tbody>
-					<?php foreach($row as $value) : ?>
-					<tr>
-						<th scope="row"><?= $value['id'] ?></th>
-						<td><?= $value['nombre'] ?></td>
-						<td><?= $value['marca'] ?></td>
-						<td><?= $value['modelo'] ?></td>
-						<td><?= $value['precio'] ?></td>
-						<td><?= $value['unidades'] ?></td>
-						<td><?= $value['detalles'] ?></td>
-						<td><img src=<?= $value['imagen'] ?> ></td>
-						<td><a href="formulario_productos_v2.php?id=' . $row['id'] . '" class="btn btn-primary">Editar</a></td>
-					</tr>
-					<?php endforeach; ?>
-				</tbody>
-			</table>
-		<?php elseif(!empty($id)) : ?>
+                window.open(urlForm + "?" + params, "_blank");
+            }
+        </script>
+    </head>
+    <body>
+        <h3>PRODUCTO</h3>
+        <br/>
+        
+        <?php if( isset($row) ) : ?>
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Marca</th>
+                    <th scope="col">Modelo</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Unidades</th>
+                    <th scope="col">Detalles</th>
+                    <th scope="col">Imagen</th>
+                    <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach($row as $value) : ?>
+                    <tr>
+                        <th scope="row"><?= $value['id'] ?></th>
+                        <td><?= $value['nombre'] ?></td>
+                        <td><?= $value['marca'] ?></td>
+                        <td><?= $value['modelo'] ?></td>
+                        <td><?= $value['precio'] ?></td>
+                        <td><?= $value['unidades'] ?></td>
+                        <td><?= $value['detalles'] ?></td>
+                        <td><img src=<?= $value['imagen'] ?> width="100" ></td>
+                        <td>
+                            <button class="btn btn-primary" 
+                                    onclick="sendToForm(
+                                        '<?= $value['id'] ?>', 
+                                        '<?= $value['nombre'] ?>', 
+                                        '<?= $value['marca'] ?>', 
+                                        '<?= $value['modelo'] ?>', 
+                                        '<?= $value['precio'] ?>', 
+                                        '<?= $value['unidades'] ?>', 
+                                        '<?= $value['detalles'] ?>', 
+                                        '<?= $value['imagen'] ?>')">
+                                    Editar
+                            </button>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        <?php elseif(!empty($id)) : ?>
 
-			 <script>
+             <script>
                 alert('El ID del producto no existe');
              </script>
 
-		<?php endif; ?>
-	</body>
+        <?php endif; ?>
+    </body>
 </html>
